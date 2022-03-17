@@ -21,6 +21,7 @@ import me.badbones69.premiumhooks.anticheat.SpartanSupport;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -32,6 +33,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -394,6 +396,25 @@ public class Swords implements Listener {
                     }
                 }
             }
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerRightClick(PlayerInteractEvent e) {
+        Player interactPlayer = e.getPlayer();
+        ItemStack item = Methods.getItemInHand(interactPlayer);
+        List<CEnchantment> enchantments = ce.getEnchantmentsOnItem(item);
+        
+        if(enchantments.contains(CEnchantments.LOVE.getEnchantment()))
+        {
+            //Spawn heart particles
+            int amount = ce.getLevel(item, CEnchantments.LOVE);
+            //Use the players eye location
+            Location spawnLocation = interactPlayer.getEyeLocation();
+            //plus a distance to define here
+            double blocksAway = 0.75;
+            spawnLocation.add(interactPlayer.getLocation().getDirection().multiply(blocksAway));
+            interactPlayer.getLocation().getWorld().spawnParticle(Particle.HEART, spawnLocation, amount);
         }
     }
     

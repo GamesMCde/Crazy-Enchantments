@@ -60,6 +60,7 @@ public enum CEnchantments {
     CHARGE("Charge", "Sword"),
     REVENGE("Revenge", "Sword"),
     FAMISHED("Famished", "Sword", 10, 5),
+    LOVE("Love", "Sword"),
     //	----------------Armor----------------  \\
     HULK("Hulk", "Armor"),
     VALOR("Valor", "Armor"),
