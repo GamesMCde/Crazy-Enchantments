@@ -433,8 +433,10 @@ public class PickAxes implements Listener {
                     break;
                 case DEEPSLATE_GOLD_ORE:
                 case GOLD_ORE:
-                case NETHER_GOLD_ORE:
                     dropItem.setMaterial(Material.GOLD_INGOT);
+                    break;
+                case NETHER_GOLD_ORE:
+                    dropItem.setMaterial(Material.GOLD_NUGGET);
                     break;
                 case DEEPSLATE_IRON_ORE:
                 case IRON_ORE:
